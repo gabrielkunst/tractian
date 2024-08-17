@@ -24,7 +24,7 @@ export function CompanyItem({
       {...props}
       onClick={onClick}
       className={twMerge(
-        'bg-secondary cursor-pointer flex items-center gap-2 transition-colors duration-200 px-3 py-1 rounded text-sm font-semibold',
+        'bg-secondary cursor-pointer flex items-center gap-2 transition-colors duration-200 px-3 py-1 rounded text-sm text-custom-white font-semibold',
         isSelected && 'bg-primary',
         className
       )}
