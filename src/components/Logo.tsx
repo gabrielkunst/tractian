@@ -1,4 +1,4 @@
-import TractionLogo from '../assets/traction-logo.svg'
+import TractionLogo from '@/assets/traction-logo.svg'
 
 interface LogoProps extends React.HTMLAttributes<SVGElement> {}
 
