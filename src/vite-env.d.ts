@@ -1,5 +1,5 @@
-/// <reference types="vite/client" />
 /// <reference types="./types/svg.d.ts" />
+/// <reference types="vite/client" />
 
 interface ImportMetaEnv {
   readonly VITE_API_URL: string

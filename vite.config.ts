@@ -5,11 +5,10 @@ import svgr from 'vite-plugin-svgr'
 
 export default defineConfig({
   plugins: [
-    tsconfigPaths(),
     react(),
+    tsconfigPaths(),
     svgr({
       svgrOptions: {
-        exportType: 'default',
         ref: true,
         svgo: false,
         titleProp: true,
@@ -17,9 +16,4 @@ export default defineConfig({
       include: '**/*.svg',
     }),
   ],
-  resolve: {
-    alias: {
-      '@': '/src',
-    },
-  },
 })
