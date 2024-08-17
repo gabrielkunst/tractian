@@ -6,6 +6,7 @@ import ThunderboltIcon from '../../../assets/icons/thunderbolt-icon.svg'
 import InfoIcon from '../../../assets/icons/info-icon.svg'
 import SearchIcon from '../../../assets/icons/search-icon.svg'
 import { Button } from '../../../components/Button'
+import { ComponentDetails } from '../components/ComponentDetails'
 
 export function CompanyOverview() {
   const { selectedCompany } = useSelectedCompany()
@@ -46,13 +47,13 @@ export function CompanyOverview() {
           <div className="relative w-full overflow-hidden border-b rounded-sm border-custom-gray-200">
             <Input
               placeholder="Buscar Ativo ou Local"
-              className="flex-1 p-4 pr-12"
+              className="flex-1 py-3 pl-4 pr-12"
             />
-            <SearchIcon className="absolute w-5 h-5 -translate-y-1/2 top-1/2 shrink-0 right-4" />
+            <SearchIcon className="absolute w-4 h-4 -translate-y-1/2 top-1/2 shrink-0 right-4" />
           </div>
         </section>
         <section className="hidden overflow-hidden border rounded sm:block sm:w-1/2 lg:w-2/3 border-custom-gray-200">
-          section 2
+          <ComponentDetails />
         </section>
       </div>
     </div>

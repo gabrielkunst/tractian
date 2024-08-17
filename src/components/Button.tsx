@@ -3,10 +3,10 @@ import { twMerge } from 'tailwind-merge'
 const buttonVariants = {
   variant: {
     default:
-      'bg-primary text-white hover:bg-primary/90 focus-visible:ring-primary/80',
+      'bg-primary text-white hover:bg-primary/90 focus-visible:ring-primary/50',
     outline:
       'border border-custom-gray-200 text-custom-gray-600 bg-transparent focus-visible:ring-custom-gray-200',
-    secondary: 'bg-secondary text-custom-white hover:bg-secondary/80',
+    secondary: 'bg-secondary text-custom-white hover:bg-secondary/50',
     link: 'text-primary underline-offset-4 hover:underline',
   },
   size: {
