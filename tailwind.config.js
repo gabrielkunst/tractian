@@ -14,7 +14,7 @@ export default {
         'custom-gray-placeholder': '#C1C9D2',
         'custom-gray-writting': '#88929C',
         'custom-dark-writting': '#1F2937',
-        'custom-white': 'rgba(255, 255, 255, 0.87)',
+        'custom-white': 'rgba(255, 255, 255)',
       },
       screens: {
         mb: '425px',

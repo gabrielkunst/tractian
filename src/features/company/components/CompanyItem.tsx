@@ -1,6 +1,6 @@
-import { twMerge } from 'tailwind-merge'
 import { Company } from '../types'
 import UnitIcon from '../../../assets/icons/unit-icon.svg'
+import { Button } from '../../../components/Button'
 
 interface CompanyItemProps extends React.HTMLAttributes<HTMLLIElement> {
   isSelected?: boolean
@@ -9,7 +9,6 @@ interface CompanyItemProps extends React.HTMLAttributes<HTMLLIElement> {
 }
 
 export function CompanyItem({
-  className,
   isSelected,
   company,
   handleCompanyClick,
@@ -20,17 +19,16 @@ export function CompanyItem({
   const onClick = () => handleCompanyClick(id)
 
   return (
-    <li
-      {...props}
-      onClick={onClick}
-      className={twMerge(
-        'bg-secondary cursor-pointer flex items-center gap-2 transition-colors duration-200 px-3 py-1 rounded text-sm text-custom-white font-semibold',
-        isSelected && 'bg-primary',
-        className
-      )}
-    >
-      <UnitIcon className="w-4 h-4 shrink-0" />
-      {name} Unit
+    <li {...props}>
+      <Button
+        className="font-semibold"
+        variant={isSelected ? 'default' : 'secondary'}
+        size="sm"
+        onClick={onClick}
+      >
+        <UnitIcon className="w-4 h-4 shrink-0" />
+        {name} Unit
+      </Button>
     </li>
   )
 }

@@ -10,7 +10,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       <input
         ref={ref}
         className={twMerge(
-          'placeholder:text-custom-gray-placeholder w-full',
+          'placeholder:text-custom-gray-placeholder w-full outline-custom-gray-200',
           className
         )}
         {...props}

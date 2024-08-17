@@ -5,6 +5,7 @@ import { Input } from '../../../components/Input'
 import ThunderboltIcon from '../../../assets/icons/thunderbolt-icon.svg'
 import InfoIcon from '../../../assets/icons/info-icon.svg'
 import SearchIcon from '../../../assets/icons/search-icon.svg'
+import { Button } from '../../../components/Button'
 
 export function CompanyOverview() {
   const { selectedCompany } = useSelectedCompany()
@@ -22,14 +23,21 @@ export function CompanyOverview() {
         />
 
         <div className="flex flex-col gap-2 mb:flex-row">
-          <button className="flex items-center w-full gap-2 px-3 py-2 font-semibold border rounded sm:w-fit">
-            <ThunderboltIcon className="w-4 h-4 shrink-0" />
+          <Button
+            variant="outline"
+            className="font-semibold"
+          >
+            <ThunderboltIcon className="w-4 h-4 shrink-0 text-primary" />
             Sensor de Energia
-          </button>
-          <button className="flex items-center w-full gap-2 px-3 py-2 font-semibold border rounded sm:w-fit">
-            <InfoIcon className="w-4 h-4 shrink-0" />
+          </Button>
+
+          <Button
+            variant="outline"
+            className="font-semibold"
+          >
+            <InfoIcon className="w-4 h-4 shrink-0 text-primary" />
             Crítico
-          </button>
+          </Button>
         </div>
       </div>
 
