@@ -1,7 +1,9 @@
+import { Layout } from './components/Layout'
+
 export function App() {
   return (
-    <div>
-      <h1>Hello</h1>
-    </div>
+    <Layout>
+      <h1>App</h1>
+    </Layout>
   )
 }
