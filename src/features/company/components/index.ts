@@ -1,3 +1,5 @@
 export * from './CompaniesList'
 export * from './CompaniesProvider'
+export * from './CompanyHeader'
+export * from './CompanyItem'
 export * from './SelectedCompanyProvider'

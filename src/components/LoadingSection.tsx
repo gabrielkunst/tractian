@@ -1,15 +1,29 @@
 import { twMerge } from 'tailwind-merge'
 import { Logo } from './Logo'
+import SpinnerIcon from '../assets/icons/spinner-icon.svg'
 
-interface LoadingSectionProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface LoadingSectionProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: 'logo' | 'spinner'
+}
 
-export function LoadingSection({ className, ...props }: LoadingSectionProps) {
+export function LoadingSection({
+  className,
+  variant = 'spinner',
+  ...props
+}: LoadingSectionProps) {
   return (
     <div
       {...props}
-      className={twMerge('flex items-center justify-center flex-1', className)}
+      className={twMerge(
+        'flex h-full items-center justify-center flex-1',
+        className
+      )}
     >
-      <Logo className="w-[200px] sm:w-[250px] h-auto animate-pulse" />
+      {variant === 'logo' ? (
+        <Logo className="w-[200px] sm:w-[250px] h-auto animate-pulse" />
+      ) : (
+        <SpinnerIcon className="w-8 h-8" />
+      )}
     </div>
   )
 }

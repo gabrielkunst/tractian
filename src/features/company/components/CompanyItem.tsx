@@ -1,5 +1,5 @@
-import { Company } from '../types'
 import UnitIcon from '../../../assets/icons/unit-icon.svg'
+import { Company } from '../types'
 import { Button } from '../../../components/Button'
 
 interface CompanyItemProps extends React.HTMLAttributes<HTMLLIElement> {

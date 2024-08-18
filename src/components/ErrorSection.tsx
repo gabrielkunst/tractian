@@ -5,7 +5,7 @@ interface ErrorSectionProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const DEFAULT_ERROR_MESSAGE =
-  'Ocorreu um erro ao carregar esta página. Por favor, tente novamente mais tarde.'
+  'Oops! Ocorreu um erro ao carregar os dados. Por favor, tente novamente mais tarde'
 
 export function ErrorSection({
   message = DEFAULT_ERROR_MESSAGE,

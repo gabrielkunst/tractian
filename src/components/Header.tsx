@@ -8,7 +8,7 @@ export function Header({ className, children, ...props }: HeaderProps) {
     <header
       {...props}
       className={twMerge(
-        'bg-tertiary px-4 h-16 flex items-center justify-center sm:justify-between',
+        'bg-tertiary px-4 h-16 flex shrink-0 items-center justify-center sm:justify-between',
         className
       )}
     >

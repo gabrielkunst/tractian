@@ -1,9 +1,9 @@
 import { PropsWithChildren, useMemo } from 'react'
 import { CompaniesContext } from '../contexts'
 import { useQuery } from '@tanstack/react-query'
-import { fetchCompaniesMock } from '../api'
 import { ErrorSection } from '../../../components/ErrorSection'
 import { LoadingSection } from '../../../components/LoadingSection'
+import { fetchCompanies } from '../api'
 
 export function CompaniesProvider({ children }: PropsWithChildren) {
   const {
@@ -12,13 +12,18 @@ export function CompaniesProvider({ children }: PropsWithChildren) {
     isError,
   } = useQuery({
     queryKey: ['companies'],
-    queryFn: fetchCompaniesMock,
+    queryFn: fetchCompanies,
   })
 
   const contextValue = useMemo(() => ({ companies }), [companies])
 
   if (isLoading) {
-    return <LoadingSection className="min-h-screen bg-tertiary" />
+    return (
+      <LoadingSection
+        className="min-h-screen bg-tertiary"
+        variant="logo"
+      />
+    )
   }
 
   if (isError) {

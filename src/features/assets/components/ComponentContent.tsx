@@ -2,6 +2,8 @@ import ReceptorIcon from '../../../assets/icons/receptor-icon.svg'
 import SensorIcon from '../../../assets/icons/sensor-icon.svg'
 import { Avatar } from '../../../components/Avatar'
 import { Separator } from '../../../components/Separator'
+import { Component } from '../../assets/types'
+import { ComponentImage } from './ComponentImage'
 import {
   ComponentInfo,
   ComponentInfoTitle,
@@ -9,22 +11,26 @@ import {
   ComponentInfoValueWrapper,
 } from './ComponentInfo'
 
-export function ComponentContent() {
+interface ComponentContentProps {
+  component: Component
+}
+
+export function ComponentContent({ component }: ComponentContentProps) {
+  const { name, equipmentType, department, receptorId, sensorId, image } =
+    component
+
   return (
     <div className="grid grid-cols-1 gap-4 p-3 lg:p-5">
       <div className="flex flex-col gap-4 lg:items-center lg:flex-row col-span-full">
-        <div className="w-full h-full overflow-hidden rounded max-w-80 max-h-52">
-          <img
-            className="object-cover object-center w-full h-full"
-            src="https://via.placeholder.com/300x300"
-            alt="Motor"
-          />
-        </div>
+        <ComponentImage
+          image={image}
+          alt={name}
+        />
 
         <div className="flex flex-col flex-1 gap-4">
           <ComponentInfo>
             <ComponentInfoTitle>Tipo de Equipamento</ComponentInfoTitle>
-            <ComponentInfoValue>Motor Elétrico (Trifásico)</ComponentInfoValue>
+            <ComponentInfoValue>{equipmentType}</ComponentInfoValue>
           </ComponentInfo>
 
           <Separator />
@@ -32,8 +38,8 @@ export function ComponentContent() {
           <ComponentInfo>
             <ComponentInfoTitle>Responsáveis</ComponentInfoTitle>
             <ComponentInfoValueWrapper>
-              <Avatar placeholder="M" />
-              <ComponentInfoValue>Mecânica</ComponentInfoValue>
+              <Avatar placeholder={department[0].toUpperCase()} />
+              <ComponentInfoValue>{department}</ComponentInfoValue>
             </ComponentInfoValueWrapper>
           </ComponentInfo>
         </div>
@@ -42,19 +48,19 @@ export function ComponentContent() {
       <Separator />
 
       <div className="grid grid-cols-3 gap-4 col-span-full">
-        <ComponentInfo className="col-span-1">
+        <ComponentInfo className="col-span-full lg:col-span-1">
           <ComponentInfoTitle>Sensor</ComponentInfoTitle>
           <ComponentInfoValueWrapper>
             <SensorIcon className="w-6 h-6 text-primary shrink-0" />
-            <ComponentInfoValue>RWET667</ComponentInfoValue>
+            <ComponentInfoValue>{sensorId}</ComponentInfoValue>
           </ComponentInfoValueWrapper>
         </ComponentInfo>
 
-        <ComponentInfo className="col-span-1">
+        <ComponentInfo className="col-span-full lg:col-span-1">
           <ComponentInfoTitle>Receptor</ComponentInfoTitle>
           <ComponentInfoValueWrapper>
             <ReceptorIcon className="w-6 h-6 text-primary shrink-0" />
-            <ComponentInfoValue>86GTFD7</ComponentInfoValue>
+            <ComponentInfoValue>{receptorId}</ComponentInfoValue>
           </ComponentInfoValueWrapper>
         </ComponentInfo>
       </div>
