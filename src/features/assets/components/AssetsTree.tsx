@@ -7,6 +7,7 @@ import { useAssetsTree } from '../hooks/useAssetsTree'
 import { useEffect, useMemo } from 'react'
 import { TreeAction } from '../reducers/treeReducer'
 import { useAssetsData } from '../hooks/useAssetsData'
+import { EmptySection } from '../../../components/EmptySection'
 
 export function AssetsTree() {
   const { selectedCompany } = useSelectedCompany()
@@ -36,12 +37,16 @@ export function AssetsTree() {
 
   return (
     <div className="flex-1 p-2 overflow-auto">
-      {state.nodes.map((node) => (
+      {state.filteredNodes.map((node) => (
         <TreeNode
           key={node.id}
           node={node}
         />
       ))}
+
+      {state.filteredNodes.length === 0 && (
+        <EmptySection message="Nenhum ativo encontrado" />
+      )}
     </div>
   )
 }

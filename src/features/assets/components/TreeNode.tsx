@@ -6,18 +6,15 @@ import BoltIcon from '../../../assets/icons/bolt-icon.svg'
 import DotIcon from '../../../assets/icons/dot-icon.svg'
 import type { TreeNode as TreeNodeType } from '../types'
 import { twMerge } from 'tailwind-merge'
-import { useState } from 'react'
+import { useAssetsTree } from '../hooks/useAssetsTree'
+import { TreeAction } from '../reducers/treeReducer'
 
 interface TreeNodeProps {
   node: TreeNodeType
 }
 
 export function TreeNode({ node }: TreeNodeProps) {
-  const [isOpen, setIsOpen] = useState(false)
-
-  const toggleOpen = () => {
-    setIsOpen(!isOpen)
-  }
+  const { dispatch } = useAssetsTree()
 
   const isLocation = node.type === 'location'
   const isAsset = node.type === 'asset'
@@ -26,17 +23,28 @@ export function TreeNode({ node }: TreeNodeProps) {
   const isEnergySensor = node.sensorType === 'energy'
   const isOperating = node.status === 'operating'
 
+  const handleToggle = () => {
+    if (!hasChildren) {
+      return
+    }
+
+    dispatch({
+      type: TreeAction.TOGGLE_NODE,
+      payload: { nodeId: node.id, isExpanded: !node.isExpanded },
+    })
+  }
+
   return (
     <div>
       <button
         className="flex items-center min-w-0 gap-2 p-1"
-        onClick={toggleOpen}
+        onClick={handleToggle}
       >
         {hasChildren && (
           <AngleIcon
             className={twMerge(
               'w-3 h-3 shrink-0 transition-transform duration-200 ease-in-out',
-              isOpen ? 'rotate-0' : '-rotate-90'
+              node.isExpanded ? 'rotate-0' : '-rotate-90'
             )}
           />
         )}
@@ -72,7 +80,7 @@ export function TreeNode({ node }: TreeNodeProps) {
         )}
       </button>
 
-      {isOpen && hasChildren && (
+      {node.isExpanded && hasChildren && (
         <div className="pl-2 ml-2 border-l border-custom-gray-150">
           {node.children.map((child) => (
             <TreeNode

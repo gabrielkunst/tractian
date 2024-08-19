@@ -15,6 +15,7 @@ export function createAssetsTree(
       sensorType: null,
       status: null,
       children: [],
+      isExpanded: false,
     })
   })
 
@@ -26,6 +27,7 @@ export function createAssetsTree(
       sensorType: asset.sensorType,
       status: asset.status,
       children: [],
+      isExpanded: false,
     })
   })
 

@@ -40,4 +40,5 @@ export type TreeNode = {
   children: TreeNode[]
   sensorType: SensorType | null
   status: Status | null
+  isExpanded: boolean
 }

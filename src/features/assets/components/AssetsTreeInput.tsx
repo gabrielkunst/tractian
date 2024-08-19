@@ -1,11 +1,13 @@
 import SearchIcon from '../../../assets/icons/search-icon.svg'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Input } from '../../../components/Input'
 import { useAssetsTree } from '../hooks/useAssetsTree'
 import { TreeAction } from '../reducers/treeReducer'
 import { useDebouncedCallback } from '../hooks/useDebouncedCallback'
+import { useSelectedCompany } from '../../company/hooks'
 
 export function AssetsTreeInput() {
+  const { selectedCompany } = useSelectedCompany()
   const { dispatch } = useAssetsTree()
   const [search, setSearch] = useState('')
 
@@ -25,6 +27,10 @@ export function AssetsTreeInput() {
     setSearch(value)
     debouncedSearchDispatch(value)
   }
+
+  useEffect(() => {
+    setSearch('')
+  }, [selectedCompany?.id])
 
   return (
     <div className="relative w-full overflow-hidden border-b rounded-sm border-custom-gray-200">
