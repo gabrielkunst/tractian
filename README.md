@@ -57,17 +57,3 @@ A aplicação é estruturada em torno de três entidades principais:
   │   │   ├── Componente D1
   └── Componente X
 ```
-
-## Design
-
-[Link para o Figma](https://www.figma.com/file/F52Yv8RmGoGOYcV9CiuIZ1/%5BCareers%5D-Frontend-Challenge-v2?type=design&node-id=0-1&mode=design&t=r3n2A4W0ZFUwVjAs-0)
-
-## API de Demonstração
-
-A API suporta apenas requisições GET e possui os seguintes endpoints:
-
-- `/companies` - Retorna todas as empresas.
-- `/companies/:companyId/locations` - Retorna todos os locais da empresa.
-- `/companies/:companyId/assets` - Retorna todos os ativos da empresa.
-
-API: [fake-api.tractian.com](https://fake-api.tractian.com)

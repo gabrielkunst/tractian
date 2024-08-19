@@ -1,6 +1,6 @@
 import { PropsWithChildren, useReducer } from 'react'
-import { AssetsTreeContext } from '../contexts/AssetsTreeContext'
-import { initialState, treeReducer } from '../reducers/treeReducer'
+import { AssetsTreeContext } from '../contexts'
+import { initialState, treeReducer } from '../reducers'
 
 export function AssetsTreeProvider({ children }: PropsWithChildren) {
   const [state, dispatch] = useReducer(treeReducer, initialState)

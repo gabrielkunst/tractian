@@ -6,5 +6,11 @@ export function filterTreeAction(
   search: string,
   filters: TreeFilter
 ): TreeNode[] {
+  console.log('FILTERING TREE: ', {
+    tree,
+    search,
+    filters,
+  })
+
   return tree
 }

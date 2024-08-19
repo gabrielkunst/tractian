@@ -1,12 +1,11 @@
-import { createAssetsTree } from '../utils/createAssetsTree'
+import { createAssetsTree } from '../utils'
 import { TreeNode } from './TreeNode'
 import { useSelectedCompany } from '../../company/hooks'
 import { LoadingSection } from '../../../components/LoadingSection'
 import { ErrorSection } from '../../../components/ErrorSection'
-import { useAssetsTree } from '../hooks/useAssetsTree'
+import { useAssetsTree, useAssetsData } from '../hooks'
 import { useEffect, useMemo } from 'react'
-import { TreeAction } from '../reducers/treeReducer'
-import { useAssetsData } from '../hooks/useAssetsData'
+import { TreeAction } from '../reducers'
 import { EmptySection } from '../../../components/EmptySection'
 
 export function AssetsTree() {

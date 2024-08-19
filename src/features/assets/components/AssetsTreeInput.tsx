@@ -1,9 +1,8 @@
 import SearchIcon from '../../../assets/icons/search-icon.svg'
 import { useEffect, useState } from 'react'
 import { Input } from '../../../components/Input'
-import { useAssetsTree } from '../hooks/useAssetsTree'
-import { TreeAction } from '../reducers/treeReducer'
-import { useDebouncedCallback } from '../hooks/useDebouncedCallback'
+import { useAssetsTree, useDebouncedCallback } from '../hooks'
+import { TreeAction } from '../reducers'
 import { useSelectedCompany } from '../../company/hooks'
 
 export function AssetsTreeInput() {

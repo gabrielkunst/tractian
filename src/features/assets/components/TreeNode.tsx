@@ -6,8 +6,8 @@ import BoltIcon from '../../../assets/icons/bolt-icon.svg'
 import DotIcon from '../../../assets/icons/dot-icon.svg'
 import type { TreeNode as TreeNodeType } from '../types'
 import { twMerge } from 'tailwind-merge'
-import { useAssetsTree } from '../hooks/useAssetsTree'
-import { TreeAction } from '../reducers/treeReducer'
+import { useAssetsTree } from '../hooks'
+import { TreeAction } from '../reducers'
 
 interface TreeNodeProps {
   node: TreeNodeType

@@ -1,8 +1,7 @@
-import { CompanyHeader } from '../components/CompanyHeader'
-import { CompanyContent } from '../components/CompanyContent'
+import { CompanyContent, CompanyHeader } from '../components'
 import { useSelectedCompany } from '../hooks'
 import { EmptySection } from '../../../components/EmptySection'
-import { AssetsTreeProvider } from '../../assets/components/AssetsTreeProvider'
+import { AssetsTreeProvider } from '../../assets/components'
 
 export function CompanyOverview() {
   const { selectedCompany } = useSelectedCompany()

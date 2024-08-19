@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { SelectedCompanyContext } from '../contexts/SelectedCompanyContext'
+import { SelectedCompanyContext } from '../contexts'
 
 export function useSelectedCompany() {
   const context = useContext(SelectedCompanyContext)

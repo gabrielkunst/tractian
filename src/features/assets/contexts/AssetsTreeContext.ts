@@ -1,5 +1,5 @@
 import { createContext, Dispatch } from 'react'
-import { Action, State } from '../reducers/treeReducer'
+import { Action, State } from '../reducers'
 
 interface AssetsTreeContextProps {
   state: State

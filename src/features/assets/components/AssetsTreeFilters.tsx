@@ -1,8 +1,8 @@
 import ThunderboltIcon from '../../../assets/icons/thunderbolt-icon.svg'
 import InfoIcon from '../../../assets/icons/info-icon.svg'
 import { Button } from '../../../components/Button'
-import { useAssetsTree } from '../hooks/useAssetsTree'
-import { TreeAction, type FilterName } from '../reducers/treeReducer'
+import { useAssetsTree } from '../hooks'
+import { TreeAction, type FilterName } from '../reducers'
 import { twMerge } from 'tailwind-merge'
 
 export function AssetsTreeFilters() {
