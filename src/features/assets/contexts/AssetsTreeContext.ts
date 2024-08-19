@@ -1,5 +1,11 @@
-import { createContext } from 'react'
+import { createContext, Dispatch } from 'react'
+import { Action, State } from '../reducers/treeReducer'
 
-interface AssetsTreeContextProps {}
+interface AssetsTreeContextProps {
+  state: State
+  dispatch: Dispatch<Action>
+}
 
-export const AssetsTreeContext = createContext<AssetsTreeContextProps>({})
+export const AssetsTreeContext = createContext<AssetsTreeContextProps>(
+  {} as AssetsTreeContextProps
+)

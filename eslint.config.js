@@ -27,6 +27,7 @@ export default tseslint.config(
       ],
       '@typescript-eslint/no-empty-object-type': 'off',
       '@tanstack/query/exhaustive-deps': 'error',
+      '@typescript-eslint/no-explicit-any': 'off',
     },
   }
 )

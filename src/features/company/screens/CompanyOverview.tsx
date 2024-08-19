@@ -2,6 +2,7 @@ import { CompanyHeader } from '../components/CompanyHeader'
 import { CompanyContent } from '../components/CompanyContent'
 import { useSelectedCompany } from '../hooks'
 import { EmptySection } from '../../../components/EmptySection'
+import { AssetsTreeProvider } from '../../assets/components/AssetsTreeProvider'
 
 export function CompanyOverview() {
   const { selectedCompany } = useSelectedCompany()
@@ -13,9 +14,11 @@ export function CompanyOverview() {
   }
 
   return (
-    <div className="flex flex-col flex-1 space-y-3 overflow-hidden">
-      <CompanyHeader companyName={selectedCompany.name} />
-      <CompanyContent />
-    </div>
+    <AssetsTreeProvider>
+      <div className="flex flex-col flex-1 space-y-3 overflow-hidden">
+        <CompanyHeader companyName={selectedCompany.name} />
+        <CompanyContent />
+      </div>
+    </AssetsTreeProvider>
   )
 }

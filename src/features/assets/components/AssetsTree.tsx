@@ -1,26 +1,28 @@
-import { useQuery } from '@tanstack/react-query'
 import { createAssetsTree } from '../utils/createAssetsTree'
 import { TreeNode } from './TreeNode'
-import { fetchAssets, fetchLocations } from '../api'
 import { useSelectedCompany } from '../../company/hooks'
 import { LoadingSection } from '../../../components/LoadingSection'
 import { ErrorSection } from '../../../components/ErrorSection'
+import { useAssetsTree } from '../hooks/useAssetsTree'
+import { useEffect, useMemo } from 'react'
+import { TreeAction } from '../reducers/treeReducer'
+import { useAssetsData } from '../hooks/useAssetsData'
 
 export function AssetsTree() {
   const { selectedCompany } = useSelectedCompany()
+  const { state, dispatch } = useAssetsTree()
 
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ['assets', selectedCompany!.id],
-    queryFn: async () => {
-      const [locations, assets] = await Promise.all([
-        fetchLocations(selectedCompany!.id),
-        fetchAssets(selectedCompany!.id),
-      ])
-
-      return { locations, assets }
-    },
-    enabled: !!selectedCompany?.id,
+  const { data, isLoading, isError } = useAssetsData({
+    companyId: selectedCompany!.id,
   })
+
+  const tree = useMemo(() => {
+    return data ? createAssetsTree(data.locations, data.assets) : []
+  }, [data])
+
+  useEffect(() => {
+    dispatch({ type: TreeAction.INIT, payload: { nodes: tree } })
+  }, [tree, dispatch])
 
   if (isLoading) {
     return <LoadingSection />
@@ -32,11 +34,9 @@ export function AssetsTree() {
     )
   }
 
-  const nodes = createAssetsTree(data!.locations, data!.assets)
-
   return (
     <div className="flex-1 p-2 overflow-auto">
-      {nodes.map((node) => (
+      {state.nodes.map((node) => (
         <TreeNode
           key={node.id}
           node={node}

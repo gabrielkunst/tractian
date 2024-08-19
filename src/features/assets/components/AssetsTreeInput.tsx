@@ -1,28 +1,30 @@
 import SearchIcon from '../../../assets/icons/search-icon.svg'
-import { useDebouncedValue } from '../hooks/useDebouncedValue'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Input } from '../../../components/Input'
+import { useAssetsTree } from '../hooks/useAssetsTree'
+import { TreeAction } from '../reducers/treeReducer'
+import { useDebouncedCallback } from '../hooks/useDebouncedCallback'
 
 export function AssetsTreeInput() {
+  const { dispatch } = useAssetsTree()
   const [search, setSearch] = useState('')
-  const debouncedSearch = useDebouncedValue(search, 500)
+
+  const debouncedSearchDispatch = useDebouncedCallback(
+    (searchValue: string) => {
+      dispatch({
+        type: TreeAction.SET_SEARCH_QUERY,
+        payload: { search: searchValue },
+      })
+    },
+    500
+  )
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const searchValue = event.target.value
-    setSearch(searchValue)
+    const { value } = event.target
+
+    setSearch(value)
+    debouncedSearchDispatch(value)
   }
-
-  const handleSearch = (searchValue: string) => {
-    console.log('SEARCHING FOR ASSETS: ', searchValue.trim())
-  }
-
-  useEffect(() => {
-    if (!debouncedSearch) {
-      return
-    }
-
-    handleSearch(debouncedSearch)
-  }, [debouncedSearch])
 
   return (
     <div className="relative w-full overflow-hidden border-b rounded-sm border-custom-gray-200">
