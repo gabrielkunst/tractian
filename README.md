@@ -1,59 +1,113 @@
-# Gerenciamento de Ativos em Estrutura de Árvore
+# 🚀 Tractian Challenge - Tree View Application
 
-## Visão Geral
+## Overview
 
-Este projeto é uma Aplicação em Estrutura de Árvore desenvolvida para exibir a hierarquia dos ativos de uma empresa, incluindo locais, ativos e componentes. A aplicação permite que os usuários explorem e gerenciem os ativos de forma eficiente por meio de uma estrutura de árvore dinâmica.
+This project is a Tree View Application developed to display the hierarchy of a company's assets, including locations, assets, and components. The application allows users to efficiently explore and manage assets through a dynamic tree structure.
 
-## Funcionalidades
+<div align="center">
+   <img src="https://github.com/gabrielkunst/tractian/.github/showcase.gif" alt="Live demo" />
+   <p>
+      <a href="https://tractian-tree.vercel.app">🚀 Click here to access the live demo!</a>
+   </p>
+</div
 
-### Visualização Dinâmica em Árvore
+---
 
-- Exibe uma estrutura hierárquica de locais, ativos e componentes.
+## Features
 
-### Capacidades de Filtragem
+### Dynamic Tree Visualization 🌳
 
-- **Pesquisa por Texto**: Permite a busca por componentes, ativos ou locais específicos dentro da árvore.
-- **Sensores de Energia**: Filtra e isola sensores de energia na árvore.
-- **Status Crítico do Sensor**: Destaca os ativos com status crítico dos sensores.
+- Displays a hierarchical structure of locations, assets, and components.
 
-### Design Responsivo
+### Filtering Capabilities 🔍
 
-- A aplicação é adaptável a diferentes tamanhos de tela, garantindo uma experiência de usuário otimizada.
+- **Text Search**: Allows searching for specific components, assets, or locations within the tree.
+- **Energy Sensors**: Filters and isolates energy sensors in the tree.
+- **Critical Sensor Status**: Highlights assets with critical sensor statuses.
 
-## Estrutura do Projeto
+### Responsive Design 📱
 
-A aplicação é estruturada em torno de três entidades principais:
+- The application adapts to different screen sizes, ensuring an optimized user experience.
 
-1. **Locais/Sub-Locais**
+## Project Structure
 
-   - Representam os locais onde os ativos estão situados.
-   - Podem conter sub-locais para manter a hierarquia organizada.
+The application is structured around three main entities:
 
-2. **Ativos/Sub-Ativos**
+1. **Locations/Sub-Locations** 📍
 
-   - Representam ativos dentro de um local.
-   - Podem conter sub-ativos ou componentes.
+   - Represent the places where assets are situated.
+   - Can contain sub-locations to maintain an organized hierarchy.
 
-3. **Componentes**
-   - São partes constituintes de um ativo.
-   - Podem estar vinculados a ativos ou locais.
+2. **Assets/Sub-Assets** 🛠️
 
-## Exemplo de Estrutura
+   - Represent assets within a location.
+   - Can contain sub-assets or components.
+
+3. **Components** 🔩
+
+   - Constituent parts of an asset.
+   - Can be linked to assets or locations.
+
+## Example Structure
 
 ```plaintext
-- Raiz
-  ├── Local A
-  │   ├── Ativo 1
-  │   │   ├── Componente A1
-  │   │   ├── Componente A2
-  │   ├── Ativo 2
-  │       ├── Componente B1
-  │       ├── Componente B2
-  ├── Local B
-  │   ├── Sub-Local C
-  │   │   ├── Ativo 3
-  │   │   │   ├── Componente C1
-  │   │   │   ├── Componente C2
-  │   │   ├── Componente D1
-  └── Componente X
+- Root
+  ├── Location A
+  │   ├── Asset 1
+  │   │   ├── Component A1
+  │   │   ├── Component A2
+  │   ├── Asset 2
+  │       ├── Component B1
+  │       ├── Component B2
+  ├── Location B
+  │   ├── Sub-Location C
+  │   │   ├── Asset 3
+  │   │   │   ├── Component C1
+  │   │   │   ├── Component C2
+  │   │   ├── Component D1
+  └── Component X
 ```
+
+## Technologies
+
+- **React** ⚛️: JavaScript library for building user interfaces.
+- **TypeScript** 🦕: Superset of JavaScript that adds static types.
+- **React Query** 📊: Data fetching library for React applications.
+- **Tailwind CSS** 🏗️: Utility-first CSS framework for rapid UI development.
+
+## Folder Structure
+
+The project follows a feature-based folder structure to organize code and assets related to specific features. The main folders are as follows:
+
+```plaintext
+public/
+src/
+   assets/
+   components/
+   features/
+      assets/
+         api/
+         components/
+         contexts/
+         hooks/
+         reducers/
+         types/
+         utils/
+      company/
+         api/
+         components/
+         contexts/
+         hooks/
+         screens/
+         types/
+   lib/
+types/
+```
+
+## Future Improvements
+
+- **Better Tree Algorithms** 🚀: Improve the algorithms for tree creation and filtering to boost performance with large datasets.
+- **List Virtualization** 📜: Implement list virtualization to render only the visible nodes, reducing DOM load.
+- **Use Web Workers** 🛠️: Offload tree creation and filtering to Web Workers to keep the UI responsive.
+- **Accessibility** ♿: Ensure the tree structure is fully accessible, including proper ARIA roles and keyboard navigation support.
+- **Testing** 🧪: Include tests for edge cases in tree creation and filtering using Jest for unit tests and Cypress for end-to-end testing.

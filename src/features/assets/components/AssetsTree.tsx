@@ -4,15 +4,16 @@ import { useSelectedCompany } from '../../company/hooks'
 import { LoadingSection } from '../../../components/LoadingSection'
 import { ErrorSection } from '../../../components/ErrorSection'
 import { useAssetsTree, useAssetsData, useSelectedComponent } from '../hooks'
-import { useEffect, useMemo } from 'react'
+import { memo, useDeferredValue, useEffect, useMemo } from 'react'
 import { TreeAction } from '../reducers'
 import { EmptySection } from '../../../components/EmptySection'
 import type { SensorType, Status, TreeNode as TreeNodeType } from '../types'
 
-export function AssetsTree() {
+function AssetsTreeComponent() {
   const { selectedCompany } = useSelectedCompany()
   const { state, dispatch } = useAssetsTree()
-  const { setSelectedComponent } = useSelectedComponent()
+  const { selectedComponent, setSelectedComponent } = useSelectedComponent()
+  const deferredTree = useDeferredValue(state.filteredNodes)
 
   const { data, isLoading, isError } = useAssetsData({
     companyId: selectedCompany!.id,
@@ -52,17 +53,20 @@ export function AssetsTree() {
 
   return (
     <div className="flex-1 p-2 overflow-auto">
-      {state.filteredNodes.map((node) => (
+      {deferredTree.map((node) => (
         <TreeNode
           key={node.id}
           handleNodeClick={handleNodeClick}
+          selectedId={selectedComponent?.id}
           node={node}
         />
       ))}
 
-      {state.filteredNodes.length === 0 && (
+      {deferredTree.length === 0 && (
         <EmptySection message="Nenhum ativo encontrado" />
       )}
     </div>
   )
 }
+
+export const AssetsTree = memo(AssetsTreeComponent)

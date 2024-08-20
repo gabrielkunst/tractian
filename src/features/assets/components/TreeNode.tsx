@@ -8,15 +8,22 @@ import type { TreeNode as TreeNodeType } from '../types'
 import { twMerge } from 'tailwind-merge'
 import { useAssetsTree } from '../hooks'
 import { TreeAction } from '../reducers'
+import { memo } from 'react'
 
 interface TreeNodeProps {
   node: TreeNodeType
+  selectedId?: string
   handleNodeClick: (node: TreeNodeType) => void
 }
 
-export function TreeNode({ node, handleNodeClick }: TreeNodeProps) {
+function TreeNodeComponent({
+  node,
+  selectedId,
+  handleNodeClick,
+}: TreeNodeProps) {
   const { dispatch } = useAssetsTree()
 
+  const isSelected = selectedId === node.id
   const isLocation = node.type === 'location'
   const isAsset = node.type === 'asset'
   const isComponent = node.type === 'component'
@@ -47,7 +54,10 @@ export function TreeNode({ node, handleNodeClick }: TreeNodeProps) {
   return (
     <div>
       <button
-        className="flex items-center min-w-0 gap-2 p-1"
+        className={twMerge(
+          'flex items-center min-w-0 gap-2 p-1 w-full transition-colors duration-200',
+          isSelected && 'bg-primary text-custom-white'
+        )}
         onClick={onClick}
       >
         {hasChildren && (
@@ -66,10 +76,22 @@ export function TreeNode({ node, handleNodeClick }: TreeNodeProps) {
         {isAsset && <AssetIcon className="w-5 h-5 shrink-0 text-primary" />}
 
         {isComponent && (
-          <ComponentIcon className="w-5 h-5 shrink-0 text-primary" />
+          <ComponentIcon
+            className={twMerge(
+              'w-5 h-5 shrink-0 transition-colors duration-200',
+              isSelected ? 'text-custom-white' : 'text-primary'
+            )}
+          />
         )}
 
-        <span className="block truncate text-tertiary">{node.name}</span>
+        <span
+          className={twMerge(
+            'block truncate text-tertiary transition-colors duration-200',
+            isSelected && 'text-custom-white'
+          )}
+        >
+          {node.name}
+        </span>
 
         {isEnergySensor && (
           <BoltIcon
@@ -96,6 +118,7 @@ export function TreeNode({ node, handleNodeClick }: TreeNodeProps) {
             <TreeNode
               key={child.id}
               node={child}
+              selectedId={selectedId}
               handleNodeClick={handleNodeClick}
             />
           ))}
@@ -104,3 +127,5 @@ export function TreeNode({ node, handleNodeClick }: TreeNodeProps) {
     </div>
   )
 }
+
+export const TreeNode = memo(TreeNodeComponent)
