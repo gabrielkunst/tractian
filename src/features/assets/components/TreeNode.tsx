@@ -11,9 +11,10 @@ import { TreeAction } from '../reducers'
 
 interface TreeNodeProps {
   node: TreeNodeType
+  handleNodeClick: (node: TreeNodeType) => void
 }
 
-export function TreeNode({ node }: TreeNodeProps) {
+export function TreeNode({ node, handleNodeClick }: TreeNodeProps) {
   const { dispatch } = useAssetsTree()
 
   const isLocation = node.type === 'location'
@@ -22,6 +23,15 @@ export function TreeNode({ node }: TreeNodeProps) {
   const hasChildren = node.children.length > 0
   const isEnergySensor = node.sensorType === 'energy'
   const isOperating = node.status === 'operating'
+
+  const onClick = () => {
+    if (isComponent) {
+      handleNodeClick(node)
+      return
+    }
+
+    handleToggle()
+  }
 
   const handleToggle = () => {
     if (!hasChildren) {
@@ -38,7 +48,7 @@ export function TreeNode({ node }: TreeNodeProps) {
     <div>
       <button
         className="flex items-center min-w-0 gap-2 p-1"
-        onClick={handleToggle}
+        onClick={onClick}
       >
         {hasChildren && (
           <AngleIcon
@@ -86,6 +96,7 @@ export function TreeNode({ node }: TreeNodeProps) {
             <TreeNode
               key={child.id}
               node={child}
+              handleNodeClick={handleNodeClick}
             />
           ))}
         </div>

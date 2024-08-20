@@ -9,6 +9,8 @@ export default {
         tertiary: '#17192D',
         destructive: '#ED3833',
         success: '#52C41A',
+        'custom-blue-50': '#F2F8FF',
+        'custom-blue-400': '#55A6FF',
         'custom-gray-150': '#E3EAEF',
         'custom-gray-200': '#D8DFE6',
         'custom-gray-500': '#88929C',

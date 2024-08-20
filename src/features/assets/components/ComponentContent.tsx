@@ -21,7 +21,7 @@ export function ComponentContent({ component }: ComponentContentProps) {
 
   return (
     <div className="grid grid-cols-1 gap-4 p-3 lg:p-5">
-      <div className="flex flex-col gap-4 lg:items-center lg:flex-row col-span-full">
+      <div className="flex flex-col gap-4 xl:items-center xl:flex-row col-span-full">
         <ComponentImage
           image={image}
           alt={name}

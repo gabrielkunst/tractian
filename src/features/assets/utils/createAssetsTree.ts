@@ -25,6 +25,8 @@ export function createAssetsTree(
       name: asset.name,
       type: asset.sensorType ? 'component' : 'asset',
       sensorType: asset.sensorType,
+      receptorId: asset.gatewayId,
+      sensorId: asset.sensorId,
       status: asset.status,
       children: [],
       isExpanded: false,
