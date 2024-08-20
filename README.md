@@ -5,11 +5,11 @@
 This project is a Tree View Application developed to display the hierarchy of a company's assets, including locations, assets, and components. The application allows users to efficiently explore and manage assets through a dynamic tree structure.
 
 <div align="center">
-   <img src="https://github.com/gabrielkunst/tractian/.github/showcase.gif" alt="Live demo" />
+   <img src="https://github.com/gabrielkunst/tractian/blob/71f31ebc23847081f472533f4b6100b13997daaf/.github/showcase.gif" alt="Live demo" />
    <p>
-      <a href="https://tractian-tree.vercel.app">🚀 Click here to access the live demo!</a>
+      <a href="https://tractian-tree.vercel.app" target="_blank" rel="noopener noreferrer">🚀 Click here to access the live demo!</a>
    </p>
-</div
+</div>
 
 ---
 
