@@ -7,60 +7,48 @@ export function filterTreeAction(
   filters: TreeFilter
 ): TreeNode[] {
   const searchLowerCase = search.toLowerCase().trim()
-  const hasActiveFilters = hasFilters(filters)
 
   return tree
-    .map((node) => filterNode(node, searchLowerCase, filters, hasActiveFilters))
+    .map((node) => filterNode(node, searchLowerCase, filters))
     .filter((node): node is TreeNode => node !== null)
 }
 
 function filterNode(
   node: TreeNode,
   searchLowerCase: string,
-  filters: TreeFilter,
-  hasActiveFilters: boolean
+  filters: TreeFilter
 ): TreeNode | null {
-  const { name, children } = node
-  const nameLowerCase = name.toLowerCase()
-
+  const nameLowerCase = node.name.toLowerCase()
   const doesNameMatch =
     !searchLowerCase || nameLowerCase.includes(searchLowerCase)
   const doesFilterMatch = applyFilters(node, filters)
 
-  const filteredChildren = children
-    ? filterTreeAction(children, searchLowerCase, filters)
-    : []
+  let filteredChildren: TreeNode[] = []
 
-  const isExpanded =
-    hasActiveFilters &&
-    ((doesNameMatch && doesFilterMatch) || filteredChildren.length > 0)
+  if (node.children) {
+    filteredChildren = filterTreeAction(node.children, searchLowerCase, filters)
+  }
 
   if ((doesNameMatch && doesFilterMatch) || filteredChildren.length > 0) {
     return {
       ...node,
-      isExpanded,
-      children: filteredChildren.length > 0 ? filteredChildren : children || [],
+      isExpanded: true,
+      children:
+        filteredChildren.length > 0 ? filteredChildren : node.children || [],
     }
   }
 
   return null
 }
 
-function applyFilters(
-  { status, sensorType }: TreeNode,
-  { criticalStatus, energySensor }: TreeFilter
-): boolean {
-  if (criticalStatus && status !== 'alert') {
+function applyFilters(node: TreeNode, filters: TreeFilter): boolean {
+  if (filters.criticalStatus && node.status !== 'alert') {
     return false
   }
 
-  if (energySensor && sensorType !== 'energy') {
+  if (filters.energySensor && node.sensorType !== 'energy') {
     return false
   }
 
   return true
-}
-
-function hasFilters(filters: TreeFilter): boolean {
-  return Object.values(filters).some(Boolean)
 }
