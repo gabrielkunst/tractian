@@ -1,17 +1,17 @@
-import { createAssetsTree } from '../utils'
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import { TreeNode } from './TreeNode'
 import { useSelectedCompany } from '../../company/hooks'
 import { LoadingSection } from '../../../components/LoadingSection'
 import { ErrorSection } from '../../../components/ErrorSection'
 import { useAssetsTree, useAssetsData, useSelectedComponent } from '../hooks'
-import { memo, useDeferredValue, useEffect, useMemo } from 'react'
-import { TreeAction } from '../reducers'
+import { memo, useDeferredValue, useEffect } from 'react'
 import { EmptySection } from '../../../components/EmptySection'
 import type { SensorType, Status, TreeNode as TreeNodeType } from '../types'
 
 function AssetsTreeComponent() {
   const { selectedCompany } = useSelectedCompany()
-  const { state, dispatch } = useAssetsTree()
+  const { state, initTree } = useAssetsTree()
   const { selectedComponent, setSelectedComponent } = useSelectedComponent()
   const deferredTree = useDeferredValue(state.filteredNodes)
 
@@ -32,14 +32,15 @@ function AssetsTreeComponent() {
     })
   }
 
-  const tree = useMemo(() => {
-    return data ? createAssetsTree(data.locations, data.assets) : []
-  }, [data])
-
   useEffect(() => {
     setSelectedComponent(null)
-    dispatch({ type: TreeAction.INIT, payload: { nodes: tree } })
-  }, [tree, dispatch, setSelectedComponent])
+
+    if (!data) {
+      return
+    }
+
+    initTree(data.locations, data.assets)
+  }, [data])
 
   if (isLoading) {
     return <LoadingSection />

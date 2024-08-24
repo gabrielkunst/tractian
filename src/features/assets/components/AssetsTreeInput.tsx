@@ -2,20 +2,16 @@ import SearchIcon from '../../../assets/icons/search-icon.svg'
 import { useEffect, useState } from 'react'
 import { Input } from '../../../components/Input'
 import { useAssetsTree, useDebouncedCallback } from '../hooks'
-import { TreeAction } from '../reducers'
 import { useSelectedCompany } from '../../company/hooks'
 
 export function AssetsTreeInput() {
   const { selectedCompany } = useSelectedCompany()
-  const { dispatch } = useAssetsTree()
+  const { state, filterTree } = useAssetsTree()
   const [search, setSearch] = useState('')
 
   const debouncedSearchDispatch = useDebouncedCallback(
     (searchValue: string) => {
-      dispatch({
-        type: TreeAction.SET_SEARCH_QUERY,
-        payload: { search: searchValue },
-      })
+      filterTree(searchValue, state.filters)
     },
     500
   )

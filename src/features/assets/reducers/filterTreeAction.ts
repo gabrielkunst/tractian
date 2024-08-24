@@ -6,7 +6,7 @@ export function filterTreeAction(
   search: string,
   filters: TreeFilter
 ): TreeNode[] {
-  const searchLowerCase = search.toLowerCase().trim()
+  const searchLowerCase = (search || '').toLowerCase().trim()
 
   return tree
     .map((node) => filterNode(node, searchLowerCase, filters))

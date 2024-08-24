@@ -1,13 +1,4 @@
 import type { TreeNode } from '../types'
-import { filterTreeAction } from './filterTreeAction'
-import { toggleNodeAction } from './toggleNodeAction'
-
-enum TreeAction {
-  INIT = 'INIT',
-  TOGGLE_NODE = 'TOGGLE_NODE',
-  SET_SEARCH_QUERY = 'SET_SEARCH_QUERY',
-  TOGGLE_FILTER = 'TOGGLE_FILTER',
-}
 
 type TreeFilter = {
   energySensor: boolean
@@ -23,22 +14,26 @@ type State = {
 
 type FilterName = keyof TreeFilter
 
+enum TreeAction {
+  INIT_TREE_COMPLETE = 'INIT_TREE_COMPLETE',
+  FILTER_TREE_ASYNC = 'FILTER_TREE_ASYNC',
+  TOGGLE_NODE_ASYNC = 'TOGGLE_NODE_ASYNC',
+  FILTER_TREE_COMPLETE = 'FILTER_TREE_COMPLETE',
+  TOGGLE_NODE_COMPLETE = 'TOGGLE_NODE_COMPLETE',
+}
+
 type Action =
-  | { type: TreeAction.INIT; payload: { nodes: TreeNode[] } }
+  | { type: TreeAction.INIT_TREE_COMPLETE; payload: TreeNode[] }
   | {
-      type: TreeAction.TOGGLE_NODE
+      type: TreeAction.FILTER_TREE_ASYNC
+      payload: { searchTerm: string; filters: TreeFilter }
+    }
+  | {
+      type: TreeAction.TOGGLE_NODE_ASYNC
       payload: { nodeId: string; isExpanded: boolean }
     }
-  | {
-      type: TreeAction.SET_SEARCH_QUERY
-      payload: { search: string }
-    }
-  | {
-      type: TreeAction.TOGGLE_FILTER
-      payload: {
-        filterName: FilterName
-      }
-    }
+  | { type: TreeAction.FILTER_TREE_COMPLETE; payload: TreeNode[] }
+  | { type: TreeAction.TOGGLE_NODE_COMPLETE; payload: TreeNode[] }
 
 const initialState: State = {
   nodes: [],
@@ -52,8 +47,8 @@ const initialState: State = {
 
 function treeReducer(prevState: State, action: Action): State {
   switch (action.type) {
-    case TreeAction.INIT: {
-      const { nodes } = action.payload
+    case TreeAction.INIT_TREE_COMPLETE: {
+      const nodes = action.payload
 
       return {
         ...prevState,
@@ -64,28 +59,18 @@ function treeReducer(prevState: State, action: Action): State {
       }
     }
 
-    case TreeAction.SET_SEARCH_QUERY: {
-      const { search } = action.payload
-      const filteredNodes = filterTreeAction(
-        prevState.nodes,
-        search,
-        prevState.filters
-      )
+    case TreeAction.FILTER_TREE_ASYNC: {
+      const { searchTerm, filters } = action.payload
 
       return {
         ...prevState,
-        searchTerm: search,
-        filteredNodes,
+        searchTerm,
+        filters,
       }
     }
 
-    case TreeAction.TOGGLE_NODE: {
-      const { nodeId, isExpanded } = action.payload
-      const filteredNodes = toggleNodeAction(
-        prevState.filteredNodes,
-        nodeId,
-        isExpanded
-      )
+    case TreeAction.FILTER_TREE_COMPLETE: {
+      const filteredNodes = action.payload
 
       return {
         ...prevState,
@@ -93,22 +78,16 @@ function treeReducer(prevState: State, action: Action): State {
       }
     }
 
-    case TreeAction.TOGGLE_FILTER: {
-      const { filterName } = action.payload
-      const updatedFilters = {
-        ...prevState.filters,
-        [filterName]: !prevState.filters[filterName],
-      }
-      const filteredNodes = filterTreeAction(
-        prevState.nodes,
-        prevState.searchTerm,
-        updatedFilters
-      )
+    case TreeAction.TOGGLE_NODE_ASYNC: {
+      return prevState
+    }
+
+    case TreeAction.TOGGLE_NODE_COMPLETE: {
+      const toggledNodes = action.payload
 
       return {
         ...prevState,
-        filters: updatedFilters,
-        filteredNodes,
+        filteredNodes: toggledNodes,
       }
     }
 

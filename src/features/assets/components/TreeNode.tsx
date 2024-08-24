@@ -7,7 +7,6 @@ import DotIcon from '../../../assets/icons/dot-icon.svg'
 import type { TreeNode as TreeNodeType } from '../types'
 import { twMerge } from 'tailwind-merge'
 import { useAssetsTree } from '../hooks'
-import { TreeAction } from '../reducers'
 import { memo } from 'react'
 
 interface TreeNodeProps {
@@ -21,7 +20,7 @@ function TreeNodeComponent({
   selectedId,
   handleNodeClick,
 }: TreeNodeProps) {
-  const { dispatch } = useAssetsTree()
+  const { toggleNode } = useAssetsTree()
 
   const isSelected = selectedId === node.id
   const isLocation = node.type === 'location'
@@ -45,10 +44,7 @@ function TreeNodeComponent({
       return
     }
 
-    dispatch({
-      type: TreeAction.TOGGLE_NODE,
-      payload: { nodeId: node.id, isExpanded: !node.isExpanded },
-    })
+    toggleNode(node.id, !node.isExpanded)
   }
 
   return (

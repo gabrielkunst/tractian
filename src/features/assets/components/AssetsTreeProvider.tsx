@@ -1,15 +1,17 @@
-import { PropsWithChildren, useReducer } from 'react'
+import { PropsWithChildren } from 'react'
+import { useTreeReducer } from '../hooks/useTreeReducer'
 import { AssetsTreeContext } from '../contexts'
-import { initialState, treeReducer } from '../reducers'
 
 export function AssetsTreeProvider({ children }: PropsWithChildren) {
-  const [state, dispatch] = useReducer(treeReducer, initialState)
+  const { state, filterTree, toggleNode, initTree } = useTreeReducer()
 
   return (
     <AssetsTreeContext.Provider
       value={{
         state,
-        dispatch,
+        filterTree,
+        toggleNode,
+        initTree,
       }}
     >
       {children}

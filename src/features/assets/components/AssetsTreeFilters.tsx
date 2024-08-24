@@ -2,19 +2,19 @@ import ThunderboltIcon from '../../../assets/icons/thunderbolt-icon.svg'
 import InfoIcon from '../../../assets/icons/info-icon.svg'
 import { Button } from '../../../components/Button'
 import { useAssetsTree } from '../hooks'
-import { TreeAction, type FilterName } from '../reducers'
+import { type FilterName } from '../reducers'
 import { twMerge } from 'tailwind-merge'
 
 export function AssetsTreeFilters() {
-  const { state, dispatch } = useAssetsTree()
+  const { state, filterTree } = useAssetsTree()
 
   const isEnergySensorActive = state.filters.energySensor
   const isCriticalStatusActive = state.filters.criticalStatus
 
   const handleFilter = (filter: FilterName) => {
-    dispatch({
-      type: TreeAction.TOGGLE_FILTER,
-      payload: { filterName: filter },
+    filterTree(state.searchTerm, {
+      ...state.filters,
+      [filter]: !state.filters[filter],
     })
   }
 
